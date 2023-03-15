@@ -1,7 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
+import { io } from "socket.io-client";
+import { useEffect } from 'react';
+
+// const username = "kolya@hyperstacksinc.com";
+const username = "allan_cheam@hyperstacksinc.com";
+
+const socket = io("http://localhost:3000", {
+  extraHeaders: {
+   deviceid: "9473ff47d8dc55dd5dad004b8a18cff4ccd571aa",
+   username,
+   biometric: true
+  }
+});
 
 function App() {
+  useEffect(() => {
+    socket.on(username, (socket) => {
+      console.log(socket);
+    });
+    return () => {}
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
